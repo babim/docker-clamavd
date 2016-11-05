@@ -1,5 +1,6 @@
 docker-clamavd
 ==============
+thanks dinkel
 
 ClamAV daemon as a Docker image. It *builds* with a current virus database and
 *runs* `freshclam` in the background constantly updating the database. `clamd` 
@@ -8,11 +9,11 @@ is listening on exposed port `3310`.
 Usage
 -----
 
-    docker run -d -p 3310:3310 dinkel/clamavd
+    docker run -d -p 3310:3310 babim/clamavd
     
 or linked (this is how I use it)
 
-    docker run -d --name clamavd dinkel/clamavd
+    docker run -d --name clamavd babim/clamavd
     docker run -d --link clamavd:clamavd application-with-clamdscan-or-something
     
 Configuration (environment variables)
