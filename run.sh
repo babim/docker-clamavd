@@ -3,7 +3,7 @@ set -m
 
 if [ -z "`ls /var/lib/clamav`" ] 
 then
-	cp -R /lib-start/clamav/* /var/lib/clamav && chown -R clamav:clamav /var/lib/clamav
+	mv /lib-start/clamav/* /var/lib/clamav && chown -R clamav:clamav /var/lib/clamav
 fi
 
 freshclam -d &
