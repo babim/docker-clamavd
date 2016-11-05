@@ -1,8 +1,6 @@
-FROM debian:jessie
+FROM babim/debianbase
 
-MAINTAINER Christian Luginbühl <dinkel@pimprecords.com>
-
-ENV CLAMAV_VERSION 0.99
+ENV CLAMAV_VERSION 0.99.2
 
 RUN echo "deb http://http.debian.net/debian/ jessie main contrib non-free" > /etc/apt/sources.list && \
     echo "deb http://http.debian.net/debian/ jessie-updates main contrib non-free" >> /etc/apt/sources.list && \
@@ -20,6 +18,8 @@ RUN wget -O /var/lib/clamav/main.cvd http://database.clamav.net/main.cvd && \
     wget -O /var/lib/clamav/daily.cvd http://database.clamav.net/daily.cvd && \
     wget -O /var/lib/clamav/bytecode.cvd http://database.clamav.net/bytecode.cvd && \
     chown clamav:clamav /var/lib/clamav/*.cvd
+    
+RUN mkdir /lib-start && mv /var/lib/clamav /lib-start/
 
 RUN mkdir /var/run/clamav && \
     chown clamav:clamav /var/run/clamav && \
@@ -30,6 +30,8 @@ RUN sed -i 's/^Foreground .*$/Foreground true/g' /etc/clamav/clamd.conf && \
     sed -i 's/^Foreground .*$/Foreground true/g' /etc/clamav/freshclam.conf
 
 EXPOSE 3310
+
+VOLUME ["/var/lib/clamav"]
 
 ADD run.sh /
 
