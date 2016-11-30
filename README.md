@@ -1,3 +1,5 @@
+[![](https://images.microbadger.com/badges/image/babim/clamavd.svg)](https://microbadger.com/images/babim/clamavd "Get your own image badge on microbadger.com")[![](https://images.microbadger.com/badges/version/babim/clamavd.svg)](https://microbadger.com/images/babim/clamavd "Get your own version badge on microbadger.com")
+
 docker-clamavd
 ==============
 thanks dinkel
