@@ -29,4 +29,7 @@ function terminate() {
 trap terminate CHLD
 wait
 
+# option with entrypoint
+if [ -f "/option.sh" ]; then /option.sh; fi
+
 exit $exitcode
