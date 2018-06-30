@@ -1,14 +1,18 @@
 FROM babim/debianbase
 
-ENV CLAMAV_VERSION 0.99.2
-
-RUN echo "deb http://http.debian.net/debian/ jessie main contrib non-free" > /etc/apt/sources.list && \
-    echo "deb http://http.debian.net/debian/ jessie-updates main contrib non-free" >> /etc/apt/sources.list && \
-    echo "deb http://security.debian.org/ jessie/updates main contrib non-free" >> /etc/apt/sources.list && \
+# Download option
+## ubuntu/debian
+RUN apt-get update && \
+    apt-get install -y wget bash && cd / && wget --no-check-certificate https://raw.githubusercontent.com/babim/docker-tag-options/master/z%20SCRIPT%20AUTO/option.sh && \
+    chmod 755 /option.sh && apt-get purge -y wget
+    
+RUN echo "deb http://http.debian.net/debian/ stretch main contrib non-free" > /etc/apt/sources.list && \
+    echo "deb http://http.debian.net/debian/ stretch-updates main contrib non-free" >> /etc/apt/sources.list && \
+    echo "deb http://security.debian.org/ stretch/updates main contrib non-free" >> /etc/apt/sources.list && \
     apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -y \
-        clamav-daemon=${CLAMAV_VERSION}* \
-        clamav-freshclam=${CLAMAV_VERSION}* \
+        clamav-daemon \
+        clamav-freshclam \
         libclamunrar7 \
         wget && \
     apt-get clean && \
